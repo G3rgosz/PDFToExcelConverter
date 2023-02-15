@@ -1,3 +1,5 @@
+// by Gergosz
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -14,7 +16,6 @@ public class PDFToExcelConverterGUI extends JFrame {
     public PDFToExcelConverterGUI() {
         super("PDF to Excel Converter");
 
-        // GUI elemek inicializálása
         pdfLabel = new JLabel("PDF fájl:");
         excelLabel = new JLabel("Excel fájl:");
         pdfField = new JTextField(20);
@@ -23,7 +24,6 @@ public class PDFToExcelConverterGUI extends JFrame {
         browseExcel = new JButton("Tallózás...");
         convertButton = new JButton("Átalakítás");
 
-        // GUI elemek elrendezése
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
@@ -49,7 +49,6 @@ public class PDFToExcelConverterGUI extends JFrame {
         panel.add(convertButton, c);
         add(panel);
 
-        // Töltse be a PDF fájlt a Tallózás gombbal
         browsePDF.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
@@ -61,7 +60,6 @@ public class PDFToExcelConverterGUI extends JFrame {
             }
         });
 
-        // Tallózza az Excel fájlt a Tallózás gombbal
         browseExcel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
@@ -73,18 +71,14 @@ public class PDFToExcelConverterGUI extends JFrame {
             }
         });
 
-        // PDF átalakítása Excel fájlra az Átalakítás gombbal
         convertButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String pdfFileName = pdfField.getText();
                 String excelFileName = excelField.getText();
                 try {
                 Document doc = new Document(pdfFileName);
-                // Set Excel options
                 ExcelSaveOptions options = new ExcelSaveOptions();
-                // Set output format
                 options.setFormat(ExcelSaveOptions.ExcelFormat.XLSX);
-                // Convert PDF to XLSX
                 doc.save(excelFileName, options);
                     JOptionPane.showMessageDialog(null, "Az átalakítás befejeződött!");
                 } catch (Exception ex) {
@@ -93,7 +87,6 @@ public class PDFToExcelConverterGUI extends JFrame {
             }
         });
 
-        // Ablak beállítások
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
